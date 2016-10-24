@@ -5,11 +5,22 @@ class StoriesController < ApplicationController
   # GET /stories.json
   def index
     @stories = Story.all
+    @story = Story.new
   end
 
   # GET /stories/1
   # GET /stories/1.json
   def show
+    @storyChain = [@story]
+    lastStory = @story
+    while true do
+      story = Story.find_by parent_id: lastStory.id
+      if story.nil?
+        break
+      end
+      @storyChain.push(story)
+      lastStory = story
+    end
   end
 
   # GET /stories/new
@@ -28,8 +39,9 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       if @story.save
-        format.html { redirect_to @story, notice: 'Story was successfully created.' }
-        format.json { render :show, status: :created, location: @story }
+        #format.html { redirect_to @story, notice: 'Story was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Story was successfully created.' }
+        #format.json { render :show, status: :created, location: @story }
       else
         format.html { render :new }
         format.json { render json: @story.errors, status: :unprocessable_entity }
