@@ -1,0 +1,5 @@
+class RemoveChildFromStories < ActiveRecord::Migration[5.0]
+  def change
+    remove_column :stories, :child_id, :integer
+  end
+end
