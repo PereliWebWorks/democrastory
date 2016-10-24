@@ -11,7 +11,6 @@ class StoriesController < ApplicationController
   # GET /stories/1
   # GET /stories/1.json
   def show
-    @new_child_story = Story.new
     @storyChain = [@story]
     lastStory = @story
     while true do
@@ -22,6 +21,8 @@ class StoriesController < ApplicationController
       @storyChain.push(story)
       lastStory = story
     end
+    @new_child_story = Story.new
+    @new_child_story.parent_id = lastStory.id
   end
 
   # GET /stories/new
@@ -33,12 +34,14 @@ class StoriesController < ApplicationController
   # POST /stories.json
   def create
     @story = Story.new(story_params)
-
     respond_to do |format|
       if @story.save
-        #format.html { redirect_to @story, notice: 'Story was successfully created.' }
-        format.html { redirect_to root_path, notice: 'Story was successfully created.' }
-        #format.json { render :show, status: :created, location: @story }
+        if @story.parent_id == -1 #if it's a root story
+          format.html { redirect_to root_path, notice: 'Story was successfully created.' }
+        else #if it's a child story
+          format.html { redirect_to @story, notice: 'Story was successfully created.' }
+        end
+        format.json { render :show, status: :created, location: @story }
       else
         format.html { render :new }
         format.json { render json: @story.errors, status: :unprocessable_entity }
@@ -78,6 +81,6 @@ class StoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def story_params
-      params.require(:story).permit(:content, :parent_id, :child_id, :user_id, :upvotes, :published)
+      params.require(:story).permit(:content, :parent_id, :user_id, :upvotes, :published)
     end
 end
