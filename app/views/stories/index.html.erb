@@ -1,23 +1,40 @@
+
 <p id="notice"><%= notice %></p>
+<span class="container-fluid">
+  <span class="row">
+    <h1 class="col-xs-12 text-center">Democrastory</h1>
+  </span>
+  
+  <span class="row">
+    <span class="col-xs-3"></span><!--Spacer-->
+    <span class="col-xs-6">
 
-<h1>Democrastory</h1>
+    <!--Main content-->
 
-<h2>Submit a new top level story</h2>
-<%= render 'rootStoryForm', story: @story %>
+      <span class="row">
+        <h2 class="col-xs-12">Submit a new top level story</h2>
+      </span>
+      <%= render 'rootStoryForm', story: @story %>
+      <span class="row">
+        <span id="stories-container" class="col-xs-12">
+          <span class="row">
+            <% @stories.each do |story| %>
+              <div class="row story-container">
+                <span class="story-content col-xs-12"><%= link_to story.content, story %></span>
+                <span class="col-xs-6">Created by <%= story.user_id %></span>
+                <span class="col-xs-6">
+                  <%= link_to 'Destroy', story, method: :delete, data: { confirm: 'Are you sure?' } %>
+                </span>
+              </div>
+            <% end %>
+          </span>
+        </span>
+      </span>
+      <%= link_to 'New Story', new_story_path %>
 
-<table>
-  <tbody>
-    <% @stories.each do |story| %>
-      <tr>
-        <td><%= link_to story.content, story %></td>
-        <td><%= story.user_id %></td>
-        <td>+<%= story.upvotes %></td>
-        <td><%= link_to 'Destroy', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <!--End main content-->
 
-<br>
-
-<%= link_to 'New Story', new_story_path %>
+    </span>
+    <span class="col-xs-3"></span><!--Spacer-->
+  </span>
+</span>

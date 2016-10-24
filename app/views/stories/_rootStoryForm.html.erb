@@ -1,22 +1,25 @@
-<%= form_for(story) do |f| %>
-  <% if story.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(story.errors.count, "error") %> prohibited this story from being saved:</h2>
 
-      <ul>
-      <% story.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<span clas="row">
+  <%= form_for(story, html: { class: "" }) do |f| %>
+    <% if story.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(story.errors.count, "error") %> prohibited this story from being saved:</h2>
+
+        <ul>
+        <% story.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field row">
+      <%= f.text_area :content, size: "60x10" %>
+    </div>
+
+
+    <div class="actions row">
+      <%= f.submit %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.text_area :content, size: "60x10" %>
-  </div>
-
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</span>
