@@ -11,6 +11,7 @@ class StoriesController < ApplicationController
   # GET /stories/1
   # GET /stories/1.json
   def show
+    @new_child_story = Story.new
     @storyChain = [@story]
     lastStory = @story
     while true do
@@ -26,10 +27,6 @@ class StoriesController < ApplicationController
   # GET /stories/new
   def new
     @story = Story.new
-  end
-
-  # GET /stories/1/edit
-  def edit
   end
 
   # POST /stories

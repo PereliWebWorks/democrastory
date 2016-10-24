@@ -11,9 +11,8 @@
       <tr>
         <td><%= link_to story.content, story %></td>
         <td><%= story.user_id %></td>
-        <td><%= story.upvotes %></td>
-        <td><%= link_to 'Edit', edit_story_path(story) %></td>
-        <td><%= link_to 'Destroy', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>+<%= story.upvotes %></td>
+        <td><%#= link_to 'Destroy', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
