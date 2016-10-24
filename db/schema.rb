@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024041904) do
+ActiveRecord::Schema.define(version: 20161024050036) do
 
   create_table "stories", force: :cascade do |t|
     t.text     "content"
     t.integer  "parent_id",  default: -1
-    t.integer  "user_id"
+    t.integer  "user_id",    default: 0
     t.integer  "upvotes",    default: 0
     t.boolean  "published",  default: false
     t.datetime "created_at",                 null: false

@@ -1,30 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @story.content %>
-</p>
+<% @storyChain.each do |story| %>
+  
+  <p>
+    <%= link_to story.content, story %>
+  </p>
 
-<p>
-  <strong>Parent:</strong>
-  <%= @story.parent_id %>
-</p>
+  <p>
+    <%= story.user_id %>
+  </p>
+
+  <p>
+    +<%= story.upvotes %>
+  </p>
+  <hr/>
+<% end %>
 
 
-<p>
-  <strong>User:</strong>
-  <%= @story.user_id %>
-</p>
-
-<p>
-  <strong>Upvotes:</strong>
-  <%= @story.upvotes %>
-</p>
-
-<p>
-  <strong>Published:</strong>
-  <%= @story.published %>
-</p>
-
-<%= link_to 'Edit', edit_story_path(@story) %> |
 <%= link_to 'Back', stories_path %>
