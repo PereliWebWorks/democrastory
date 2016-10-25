@@ -1,6 +1,6 @@
 
 <span clas="row">
-  <%= form_for(story, html: { class: "" }) do |f| %>
+  <%= form_for(story, html: { class: "text-center" }) do |f| %>
     <% if story.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(story.errors.count, "error") %> prohibited this story from being saved:</h2>

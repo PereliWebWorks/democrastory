@@ -12,7 +12,7 @@
     <!--Main content-->
 
       <span class="row">
-        <h2 class="col-xs-12">Submit a new top level story</h2>
+        <h2 class="col-xs-12 text-center">Submit a new top level story</h2>
       </span>
       <%= render 'rootStoryForm', story: @story %>
       <span class="row">
@@ -22,7 +22,7 @@
               <div class="row story-container">
                 <span class="story-content col-xs-12"><%= link_to story.content, story %></span>
                 <span class="col-xs-6">Created by <%= story.user_id %></span>
-                <span class="col-xs-6">
+                <span class="col-xs-6 text-right">
                   <%= link_to 'Destroy', story, method: :delete, data: { confirm: 'Are you sure?' } %>
                 </span>
               </div>
@@ -30,7 +30,6 @@
           </span>
         </span>
       </span>
-      <%= link_to 'New Story', new_story_path %>
 
     <!--End main content-->
 
