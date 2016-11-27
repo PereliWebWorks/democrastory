@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161126034640) do
+ActiveRecord::Schema.define(version: 20161127233708) do
+
+  create_table "stories", force: :cascade do |t|
+    t.string   "title"
+    t.text     "contet",                       null: false
+    t.integer  "parent_id_id"
+    t.integer  "user_id_id",                   null: false
+    t.boolean  "published",    default: false, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["parent_id_id"], name: "index_stories_on_parent_id_id"
+    t.index ["user_id_id"], name: "index_stories_on_user_id_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
