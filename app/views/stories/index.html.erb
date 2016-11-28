@@ -6,13 +6,23 @@
 	<!-- Content start -->
 	<div class="col-xs-6">
 		<div class="row">
+			<div class="col-xs-12 text-center">
+				<h1 class="btn btn-primary text-center link-button">
+					<%= link_to "Start a new story", new_story_path%>
+				</h1>
+			</div>
 			<h1 class="col-xs-12 text-center">Recent Stories</h1>
 			<div class="stories-container">
 				<%@stories.each do |story|%>
 					<div class="col-xs-12 story-container">
-						<h3 class="story-title col-xs-12"><%=story.title%></h3>
-						<div class="story-author col-xs-12"><%=User.find_by(id: story.user_id).name%></div>
-						<div class="story-content col-xs-12"><%=story.content%></div>
+						<h3 class="story-title col-xs-12"><%= link_to story.title, story%></h3>
+						<div class="story-content col-xs-12">
+							<%= link_to story.content, story %>
+						</div>
+						<div class="story-author col-xs-6">
+							<%= link_to story.user.name, story.user%>
+						</div>
+						<div class="story-date col-xs-6"><%=story.created_at%></div>
 					</div>
 				<%end%>
 			</div>

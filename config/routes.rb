@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
+  root 'stories#index'
   get 'sessions/new'
-
-  root 'static_pages#home'
   get  '/help',    to: 'static_pages#help'
   get  '/about',   to: 'static_pages#about'
   get  '/signup',  to: 'users#new'
@@ -9,5 +8,7 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  get '/stories', to: 'stories#index'
+  resources :stories, only: [:index, :show]
+  get '/new_story', to: 'stories#new_root'
+  post '/stories', to: 'stories#create'
 end
