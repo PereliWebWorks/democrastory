@@ -38,13 +38,22 @@
 			<h3 class="col-xs-12 text-center">Current continuations</h3>
 			<div class="stories-container">
 				<% @unpublishedChildren.each do |story| %>
+					<!-- vote form -->
 					<div class="col-xs-2">
 						<%= form_for(@vote) do |f| %>
 							<%= f.hidden_field :story_id, :value => story.id %>
 							<%= f.submit "Vote for", class: "btn btn-success" %>
 						<% end %>
 					</div>
-					<div class="story-container col-xs-10">
+					<!-- end vote form -->
+					<!-- vote count -->
+					<div class="col-xs-2">
+						<span class="vote-count">
+							+<%= Vote.where(story: story).count %>
+						</span>
+					</div>
+					<!-- end vote count -->
+					<div class="story-container col-xs-8">
 						<div class="story-content col-xs-12">
 							<%= story.content %>
 						</div>
