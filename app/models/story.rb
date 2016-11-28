@@ -1,4 +1,4 @@
 class Story < ApplicationRecord
-  belongs_to :parent_id
-  belongs_to :user_id
+  belongs_to :parent, optional: true
+  belongs_to :user
 end

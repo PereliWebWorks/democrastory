@@ -1,0 +1,25 @@
+
+<div class="row">
+	<div class="col-xs-3">
+	</div>
+
+	<!-- Content start -->
+	<div class="col-xs-6">
+		<div class="row">
+			<h1 class="col-xs-12 text-center">Recent Stories</h1>
+			<div class="stories-container">
+				<%@stories.each do |story|%>
+					<div class="col-xs-12 story-container">
+						<h3 class="story-title col-xs-12"><%=story.title%></h3>
+						<div class="story-author col-xs-12"><%=User.find_by(id: story.user_id).name%></div>
+						<div class="story-content col-xs-12"><%=story.content%></div>
+					</div>
+				<%end%>
+			</div>
+		</div>
+	</div>
+	<!-- Content end -->
+
+	<div class="col-xs-3">
+	</div>
+</div>
