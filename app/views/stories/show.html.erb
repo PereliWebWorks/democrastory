@@ -25,11 +25,11 @@
 		<div class="row">
 			<h3 class="col-xs-12 text-center">Continue this story</h3>
 			<%= form_for(@newStory) do |f| %>
-
+			
 				<%= f.label :content %>
 				<%= f.text_area :content, class: 'form-control' %>
 
-				<%= f.hidden_field :parent_id %>
+				<%= f.hidden_field :parent_id  %>
 
 				<%= f.submit "Submit continuation", class: "btn btn-primary" %>
 			<% end %>
@@ -40,7 +40,8 @@
 				<% @unpublishedChildren.each do |story| %>
 					<div class="col-xs-2">
 						<%= form_for(@vote) do |f| %>
-							<% f.hidden_field :story_id 
+							<%= f.hidden_field :story_id, :value => story.id %>
+							<%= f.submit "Vote for", class: "btn btn-success" %>
 						<% end %>
 					</div>
 					<div class="story-container col-xs-10">

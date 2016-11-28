@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   resources :stories, only: [:index, :show]
   get '/new_story', to: 'stories#new_root'
   post '/stories', to: 'stories#create'
+  post '/votes', to: 'votes#create'
 end
