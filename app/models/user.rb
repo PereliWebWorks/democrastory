@@ -10,6 +10,15 @@ class User < ApplicationRecord
   
   has_many :stories
   has_many :stories, through: :votes
+
+  # Returns whether or not the user has voted on the given story
+  def hasVotedOn?(story)
+    if Vote.where("story_id = ? AND user_id = ?", story.id, self.id).count >= 1
+      true
+    else
+      false
+    end
+  end
   # Returns the hash digest of the given string.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

@@ -15,4 +15,24 @@ class Story < ApplicationRecord
   		nil
   	end
   end
+
+  def children
+  	Story.where(parent_id: self.id)
+  end
+
+  def root
+  	rootStory = self #initialize root story with the story being shown
+	while rootStory.parent #While the paret is present, get it and set it to root
+		rootStory = rootStory.parent
+	end
+	rootStory
+  end
+
+  def isLastPublishedInChain? #If this story has no published children, it's the last story in the chain
+  	if self.published && self.children.where(published: true).count === 0
+  		true
+  	else
+  		false
+  	end
+  end
 end
