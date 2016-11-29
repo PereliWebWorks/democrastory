@@ -2,14 +2,14 @@
 
 one:
   title: MyString
-  contet: MyText
+  content: MyText
   parent_id: one
   user_id: one
-  published: false
+  published: true
 
 two:
   title: MyString
-  contet: MyText
-  parent_id: two
+  content: MyText
+  parent_id: one
   user_id: two
   published: false
