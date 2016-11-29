@@ -21,4 +21,13 @@ class VotesController < ApplicationController
 			redirect_to signup_path
 		end
 	end
+
+	def destroy
+		vote = Vote.find_by(story_id: params[:vote][:story_id])
+		if vote	
+			vote.user_id = current_user.id
+			vote.destroy
+		end
+		redirect_to Story.find(params[:vote][:story_id]).parent
+	end
 end

@@ -15,13 +15,12 @@
   <body>
     <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
-        <%= link_to "Democrastory", root_path, id: "logo" %>
         <nav>
+          <ul class="nav navbar-nav">
+            <li><%= link_to "Democrastory", root_path, id: "brand" %></li>
+          </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Home", root_path %></li>
-            <li><%= link_to "Help", help_path %></li>
             <% if logged_in? %>
-              <li><%= link_to "Users", '#' %></li>
               <li>
                 <%= link_to "Log out", logout_path, method: "delete" %>
               </li>

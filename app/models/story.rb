@@ -3,6 +3,7 @@ class Story < ApplicationRecord
 
   belongs_to :parent, optional: true
   belongs_to :user
+  has_many :votes, dependent: :destroy
   has_many :users, through: :votes
   #ADD VALIDATION -- If the story is a root story 
   # it must have a title. And if it's a child story, make sure it's the child of a published story

@@ -7,9 +7,11 @@
 	<div class="col-xs-6">
 		<div class="row">
 			<div class="col-xs-12 text-center">
-				<h1 class="btn btn-primary text-center link-button">
-					<%= link_to "Start a new story", new_story_path%>
-				</h1>
+				<%= link_to(new_story_path) do %>
+					<h1 class="btn btn-lg btn-success text-center link-button">
+						Start a new story
+					</h1>
+				<% end %>
 			</div>
 			<h1 class="col-xs-12 text-center">Recent Stories</h1>
 			<div class="stories-container">
@@ -17,12 +19,14 @@
 					<div class="col-xs-12 story-container">
 						<h3 class="story-title col-xs-12"><%= link_to story.title, story%></h3>
 						<div class="story-content col-xs-12">
-							<%= link_to story.content, story %>
+							<%= story.content %>
 						</div>
 						<div class="story-author col-xs-6">
 							<%= link_to story.user.name, story.user%>
 						</div>
-						<div class="story-date col-xs-6"><%=story.created_at%></div>
+						<div class="story-date col-xs-6 text-right">
+							<%=story.created_at.to_date.to_formatted_s(:long_ordinal)%>
+						</div>
 					</div>
 				<%end%>
 			</div>

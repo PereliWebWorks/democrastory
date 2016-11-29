@@ -1,7 +1,7 @@
 class StoriesController < ApplicationController
 
 	def index
-		@stories = Story.where(parent_id: nil) #Only show top level stories
+		@stories = Story.where(parent_id: nil).order("created_at DESC") #Only show top level stories
 	end
 
 	#Shows a single story and all it's parents/children. Also allows users to add a new child if it's the last child

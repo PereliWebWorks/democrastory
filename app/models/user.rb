@@ -8,7 +8,8 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
   
-  has_many :stories
+  has_many :stories, dependent: :destroy
+  has_many :votes, dependent: :destroy
   has_many :stories, through: :votes
 
   # Returns whether or not the user has voted on the given story
