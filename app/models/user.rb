@@ -12,6 +12,10 @@ class User < ApplicationRecord
   has_many :votes, dependent: :destroy
   has_many :stories, through: :votes
 
+  def canVoteMoreThanOnce?
+    true
+  end
+
   # Returns whether or not the user has voted on the given story
   def hasVotedOn?(story)
     if Vote.where("story_id = ? AND user_id = ?", story.id, self.id).count >= 1

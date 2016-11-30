@@ -1,3 +1,29 @@
 // Place all the styles related to the Stories controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.story-container{
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+  border-bottom: 1px solid #ddd;
+  .story-content{
+	  margin-bottom: 1em;
+	  padding: 1em;
+	}
+}
+
+
+
+.current-story
+{
+	@extend .bg-success;
+	@extend .text-success;
+}
+
+ .upvote-btn
+ {
+ 	 margin-bottom: 1em;
+ }

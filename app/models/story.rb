@@ -21,6 +21,10 @@ class Story < ApplicationRecord
   	Story.where(parent_id: self.id)
   end
 
+  def siblings
+    Story.where("parent_id = ? AND id <> ?", self.parent_id, self.id)
+  end
+
   def root
   	rootStory = self #initialize root story with the story being shown
 	while rootStory.parent #While the paret is present, get it and set it to root
@@ -35,5 +39,27 @@ class Story < ApplicationRecord
   	else
   		false
   	end
+  end
+
+  def destroySiblings
+    self.siblings.destroy_all
+  end
+
+  def destroyVotes
+    self.votes.destroy_all
+  end
+
+  def publish
+    self.update(published: true)
+    #kill the siblings
+    self.destroySiblings
+    #destroy votes, which are now needless data
+    self.destroyVotes
+  end
+
+  def publishIfSufficientVotes
+    if self.votes.count >= 10
+      self.publish
+    end
   end
 end

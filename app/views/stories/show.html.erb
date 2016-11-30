@@ -10,10 +10,15 @@
 			<div class="stories-container">
 				<% @stories.each do |story|%>
 					<div class="col-xs-12 story-container">
-						<div class="story-content col-xs-12 
-									<%= story.id === params[:id].to_i ? 'current-story' : '' %>">
-							<%= link_to story.content, story%>
-						</div>
+						<% if story.id === params[:id].to_i %>
+							<div class="story-content col-xs-12 current-story">
+								<%= story.content %>
+							</div>
+						<% else %>
+							<div class="story-content col-xs-12 ">
+								<%= link_to story.content, story%>
+							</div>
+						<% end %>
 						<div class="story-author col-xs-6">
 							<%= link_to story.user.name, story.user%>
 						</div>
@@ -25,7 +30,6 @@
 		<div class="row">
 			<h3 class="col-xs-12 text-center">Continue this story</h3>
 			<%= form_for(@newStory) do |f| %>
-			
 				<%= f.label :content %>
 				<%= f.text_area :content, class: 'form-control' %>
 
@@ -36,44 +40,53 @@
 		</div>
 		<div class="row">
 			<h3 class="col-xs-12 text-center">Current continuations</h3>
-			<div class="stories-container">
-				<% @unpublishedChildren.each do |story| %>
-					<!-- vote form -->
-					<div class="col-xs-3">
-						<!-- unvote form -->
-						<% if current_user.hasVotedOn?(story) %>
-							<!-- vote on form -->
-							<%= form_for @vote, method: :delete do |f| %>
-								<%= f.hidden_field :story_id, :value => story.id %>
-								<%= f.submit "Undo vote", class: "btn btn-danger" %>
-							<% end %>
-						<% else %>
-							<!-- vote on form -->
-							<%= form_for @vote do |f| %>
-								<%= f.hidden_field :story_id, :value => story.id %>
-								<%= f.submit "Vote", class: "btn btn-success" %>
-							<% end %>
+				<% if @unpublishedChildren.count > 0 %>
+					<div class="stories-container">
+						<% @unpublishedChildren.each do |story| %>
+							<!-- vote form -->
+							<div class="col-xs-3">
+								<% if !current_user.hasVotedOn?(story) || current_user.canVoteMoreThanOnce?%>
+									<div class="row vote-btn upvote-btn">
+										<!-- vote on form -->
+										<%= form_for @vote do |f| %>
+											<%= f.hidden_field :story_id, :value => story.id %>
+											<%= f.submit "Vote", class: "btn btn-success" %>
+										<% end %>
+									</div>
+								<% end %>
+								<!-- unvote form -->
+								<% if current_user.hasVotedOn?(story) %>
+									<div class="row vote-bn unvote-btn">
+										<%= form_for @vote, method: :delete do |f| %>
+											<%= f.hidden_field :story_id, :value => story.id %>
+											<%= f.submit "Undo vote", class: "btn btn-danger" %>
+										<% end %>
+									</div>
+								<% end %>
+							</div>
+							<!-- end vote form -->
+							<!-- vote count -->
+							<div class="col-xs-1">
+								<span class="vote-count">
+									+<%= Vote.where(story: story).count %>
+								</span>
+							</div>
+							<!-- end vote count -->
+							<div class="story-container col-xs-8">
+								<div class="story-content col-xs-12">
+									<%= story.content %>
+								</div>
+								<div class="story-author col-xs-6">
+									<%= link_to story.user.name, story.user%>
+								</div>
+								<div class="story-date col-xs-6"><%=story.created_at%></div>
+							</div>
 						<% end %>
 					</div>
-					<!-- end vote form -->
-					<!-- vote count -->
-					<div class="col-xs-1">
-						<span class="vote-count">
-							+<%= Vote.where(story: story).count %>
-						</span>
-					</div>
-					<!-- end vote count -->
-					<div class="story-container col-xs-8">
-						<div class="story-content col-xs-12">
-							<%= story.content %>
-						</div>
-						<div class="story-author col-xs-6">
-							<%= link_to story.user.name, story.user%>
-						</div>
-						<div class="story-date col-xs-6"><%=story.created_at%></div>
-					</div>
+				<% else %>
+					<h5 class="text-center">There are no continuations of this story yet.</h5>
+					<br/>
 				<% end %>
-			</div>
 		</div>
 	</div>
 	<!-- Content end -->
