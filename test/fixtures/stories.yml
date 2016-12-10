@@ -3,13 +3,13 @@
 one:
   title: MyString
   content: MyText
-  parent_id: one
+  story_id: one
   user_id: one
   published: true
 
 two:
   title: MyString
   content: MyText
-  parent_id: one
+  story_id: one
   user_id: two
   published: false

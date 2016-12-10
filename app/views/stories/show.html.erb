@@ -33,7 +33,7 @@
 				<%= f.label :content %>
 				<%= f.text_area :content, class: 'form-control' %>
 
-				<%= f.hidden_field :parent_id  %>
+				<%= f.hidden_field :story_id  %>
 				<br/>
 				<%= f.submit "Submit continuation", class: "btn btn-primary" %>
 			<% end %>
@@ -45,7 +45,7 @@
 						<% @unpublishedChildren.each do |story| %>
 							<!-- vote form -->
 							<div class="col-xs-3">
-								<% if !current_user.hasVotedOn?(story) || current_user.canVoteMoreThanOnce?%>
+								<% if !logged_in? || !current_user.hasVotedOn?(story) || current_user.canVoteMoreThanOnce?%>
 									<div class="row vote-btn upvote-btn">
 										<!-- vote on form -->
 										<%= form_for @vote do |f| %>
@@ -55,7 +55,7 @@
 									</div>
 								<% end %>
 								<!-- unvote form -->
-								<% if current_user.hasVotedOn?(story) %>
+								<% if logged_in? && current_user.hasVotedOn?(story) %>
 									<div class="row vote-bn unvote-btn">
 										<%= form_for @vote, method: :delete do |f| %>
 											<%= f.hidden_field :story_id, :value => story.id %>

@@ -1,7 +1,7 @@
 class Story < ApplicationRecord
   validates :content, presence: true, length: { minimum: 10 }
 
-  belongs_to :parent, optional: true
+  belongs_to :story, optional: true
   belongs_to :user
   has_many :votes, dependent: :destroy
   has_many :users, through: :votes
@@ -10,25 +10,25 @@ class Story < ApplicationRecord
   # AND there isn't a published sibling, meaning that no more continuations for the parent are being accepted because
   # a continuation has already been published
   def parent
-  	if self.parent_id
-  		Story.find(self.parent_id)
+  	if self.story
+  		self.story
   	else
   		nil
   	end
   end
 
   def children
-  	Story.where(parent_id: self.id)
+  	Story.where(story_id: self.id)
   end
 
   def siblings
-    Story.where("parent_id = ? AND id <> ?", self.parent_id, self.id)
+    Story.where("story_id = ? AND id <> ?", self.story.id, self.id)
   end
 
   def root
   	rootStory = self #initialize root story with the story being shown
 	while rootStory.parent #While the paret is present, get it and set it to root
-		rootStory = rootStory.parent
+		rootStory = rootStory.story
 	end
 	rootStory
   end
