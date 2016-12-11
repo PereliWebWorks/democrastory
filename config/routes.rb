@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   post '/stories', to: 'stories#create'
   post '/votes', to: 'votes#create'
   delete '/votes', to: 'votes#destroy'
+  resources :account_activations, only: [:edit]
 end

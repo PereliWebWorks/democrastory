@@ -33,6 +33,29 @@
       </div>
     </header>
     <div class="container">
+      <div class="row">
+        <span class="col-xs-3"></span>
+        <span class="col-xs-6">
+          <% if flash[:info] %>
+            <div class="alert alert-info">
+              <%= flash[:info] %>
+            </div>
+          <% elsif flash[:success] %>
+            <div class="alert alert-success">
+              <%= flash[:success] %>
+            </div>
+          <% elsif flash[:warning] %>
+            <div class="alert alert-warning">
+              <%= flash[:warning] %>
+            </div>
+          <% elsif flash[:danger] %>
+            <div class="alert alert-danger">
+              <%= flash[:danger] %>
+            </div>
+          <% end %>
+        </span>
+        <span class="col-xs-3"></span>
+      </div>
       <%= yield %>
     </div>
   </body>
