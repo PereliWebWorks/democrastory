@@ -7,6 +7,21 @@
 	<!-- Content start -->
 	<div class="col-xs-6">
 		<div class="row">
+			<div class="row">
+				<h1 class="col-xs-12 text-center">Welcome to Democrastory!</h1>
+			</div>
+			<div class="row">
+				<h3 class="col-xs-12 text-center">
+					To start, <%= link_to "sign up for an account!", signup_path %>
+				</h3>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					Democrastory is a democratic story-telling platform. You can <%= link_to "start new stories", new_story_path %>, or you can continue an existing story by clicking one from the list bellow that strikes their fancy. If you continue an existing story, your continuation will be added as a candidate for continuation. Users can vote on which candidate they like the most. The first candidate to reach <%= Story.publishThreshhold %> votes becomes the official published continuation, and all other continuations of that story are destroyed. From here, users can add continuations to the newly-extended story, and the process repeats!
+				</div>
+			</div>
+		</div>
+		<div class="row">
 			<div class="col-xs-12 text-center">
 				<%= link_to(new_story_path) do %>
 					<h1 class="btn btn-lg btn-success text-center link-button">
@@ -14,7 +29,7 @@
 					</h1>
 				<% end %>
 			</div>
-			<h1 class="col-xs-12 text-center">Recent Stories</h1>
+			<h2 class="col-xs-12 text-center">Recent Stories</h2>
 			<div class="stories-container">
 				<%@stories.each do |story|%>
 					<div class="col-xs-12 story-container">
