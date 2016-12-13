@@ -30,7 +30,7 @@
 		<div class="row">
 			<h3 class="col-xs-12 text-center">Continue this story</h3>
 			<%= form_for(@newStory) do |f| %>
-				<%= f.label :content %>
+
 				<%= f.text_area :content, class: 'form-control' %>
 
 				<%= f.hidden_field :story_id  %>

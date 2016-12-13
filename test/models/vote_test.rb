@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class VoteTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "should not save vote without user_id" do
+  	vote = Vote.new
+  	assert_not vote.save
+  end
 end

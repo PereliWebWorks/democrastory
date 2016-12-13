@@ -26,6 +26,11 @@ class User < ApplicationRecord
       false
     end
   end
+
+  #returns an array of all the stories the user has written, in order of newest to oldest
+  def stories
+    
+  end
   # Returns the hash digest of the given string.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
